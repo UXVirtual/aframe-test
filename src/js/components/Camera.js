@@ -1,8 +1,1 @@
-import {Entity} from 'aframe-react';
-import React from 'react';
-
-export default props => (
-  <Entity>
-    <Entity camera="" look-controls="" wasd-controls="" {...props}/>
-  </Entity>
-);
+../../../aframe-react-boilerplate/src/js/components/Camera.js
