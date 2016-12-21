@@ -1,0 +1,27 @@
+{
+  "name": "aframe-test",
+  "version": "1.0.0",
+  "description": "Test VR project using aframe",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HAZARDU5/aframe-test.git"
+  },
+  "keywords": [
+    "VR",
+    "aframe"
+  ],
+  "author": "Michael Andrew (michael@uxvirtual.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HAZARDU5/aframe-test/issues"
+  },
+  "homepage": "https://github.com/HAZARDU5/aframe-test#readme",
+  "dependencies": {
+    "aframe": "^0.4.0"
+  }
+}
