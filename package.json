@@ -4,9 +4,6 @@
   "description": "Test VR project using aframe",
   "main": "index.js",
   "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HAZARDU5/aframe-test.git"
@@ -22,6 +19,34 @@
   },
   "homepage": "https://github.com/HAZARDU5/aframe-test#readme",
   "dependencies": {
-    "aframe": "^0.4.0"
+    "aframe": "^0.4.0",
+    "aframe-animation-component": "^3.0.4",
+    "aframe-bmfont-text-component": "^0.1.4",
+    "aframe-react": "^3.4.0",
+    "aframe-text-component": "^0.3.0",
+    "babel-polyfill": "^6.3.14",
+    "lodash": "^4.17.2",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  },
+  "devDependencies": {
+    "babel": "^6.3.13",
+    "babel-core": "^6.3.15",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "babel-runtime": "^6.3.13",
+    "css-loader": "^0.23.0",
+    "json-loader": "^0.5.4",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "serve": "webpack-dev-server --content-base src --progress --watch --history-api-fallback --inline --hot --host 0.0.0.0 --port 9090",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run serve"
   }
 }
