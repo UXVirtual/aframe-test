@@ -20,6 +20,7 @@
   "homepage": "https://github.com/HAZARDU5/aframe-test#readme",
   "dependencies": {
     "aframe": "^0.3.2",
+    "dat.guiVR": "https://github.com/dataarts/dat.guiVR.git",
     "aframe-animation-component": "^3.0.4",
     "aframe-bmfont-text-component": "^0.1.4",
     "aframe-gearvr-controls-component": "^0.1.1",

@@ -3,6 +3,7 @@ import 'aframe-animation-component';
 import 'aframe-text-component';
 import 'aframe-teleport-controls';
 import 'babel-polyfill';
+//import GUIVR from 'threevrtest/build/datguivr.min';
 import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
