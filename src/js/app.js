@@ -9,21 +9,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Camera from './components/Camera';
+import AnimatedCube from './components/AnimatedCube';
 import Text from './components/Text';
 import Sky from './components/Sky';
 
 class VRScene extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {color: 'red'};
-  }
 
-  changeColor() {
-    const colors = ['red', 'orange', 'yellow', 'green', 'blue'];
-    this.setState({
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
-  }
 
   render () {
     return (
@@ -54,31 +45,10 @@ class VRScene extends React.Component {
         <Entity light={{type: 'directional', intensity: 0.5}} position='-1 1 0'/>
         <Entity light={{type: 'directional', intensity: 1}} position='1 1 0'/>
 
-        <Entity
-          animation__rot={{property: 'rotation', dur: 2000, loop: true, to: '360 360 360'}}
-          animation__sca={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '1.1 1.1 1.1'}}
-          geometry='primitive: box'
-          material={{color: this.state.color, opacity: 0.6}}
-          position='0 -0.5 -3'
-          onClick={this.changeColor.bind(this)}>
-          <Entity
-            animation__scale={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '2 2 2'}}
-            geometry='primitive: box; depth: 0.2; height: 0.2; width: 0.2'
-            material={{color: '#24CAFF'}}/>
-        </Entity>
+  />
+            <AnimatedCube position='0 -0.5 -3' />
 
-        <Entity
-            animation__rot={{property: 'rotation', dur: 2000, loop: true, to: '360 360 360'}}
-            animation__sca={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '1.1 1.1 1.1'}}
-            geometry='primitive: box'
-            material={{color: this.state.color, opacity: 0.6}}
-            position='0 1 10'
-            onClick={this.changeColor.bind(this)}>
-            <Entity
-                animation__scale={{property: 'scale', dir: 'alternate', dur: 100, loop: true, to: '2 2 2'}}
-                geometry='primitive: box; depth: 0.2; height: 0.2; width: 0.2'
-                material={{color: '#24CAFF'}}/>
-        </Entity>
+            <AnimatedCube position='0 1 10' />
       </Scene>
     );
   }
