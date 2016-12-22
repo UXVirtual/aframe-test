@@ -3,6 +3,10 @@ Test VR project using aframe
 
 This project utilizes [aframe-react-boilerplate](https://github.com/ngokevin/aframe-react-boilerplate).
 
+## Demo
+
+You can [view the demo here](https://hazardu5.github.io/aframe-test/dist/).
+
 ## Installation
 
 1.  Run the following from the root of the repository:
