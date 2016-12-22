@@ -27,11 +27,11 @@ class VRScene extends React.Component {
 
   render () {
     return (
-      <Scene>
+      <Scene vr-mode-ui="enabled: true">
 
-          <Entity teleport-controls hand-controls="left" />
+          <Entity teleport-controls hand-controls="left" position="0 -999999999 0" />
 
-          <Entity hand-controls="right" />
+          <Entity hand-controls="right" position="0 -999999999 0" />
 
         <Camera>
           <a-cursor
