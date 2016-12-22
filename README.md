@@ -25,5 +25,12 @@ You can [view the demo here](https://hazardu5.github.io/aframe-test/dist/).
 
     Then browse to [http://localhost:9090](http://localhost:9090) to view.
 
+*   To do a build for distribution online run the following from the root of the repository:
+
+    ```
+    npm run dist
+    ```
+
 *   If using Samsung GearVR and the Carmel browser is installed, you can view it by entering the following link into
-    your 2D web browser (e.g. Chrome / Firefox): [ovrweb:http://YOUR_IP_ADDRESS:9090](ovrweb:http://YOUR_IP_ADDRESS:9090)
+    your 2D web browser (e.g. Chrome / Firefox): [ovrweb:http://YOUR_IP_ADDRESS:9090](ovrweb:http://YOUR_IP_ADDRESS:9090).
+    Alternately, tap the *Open in GearVR* button in the bottom left of the screen.
