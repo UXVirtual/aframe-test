@@ -24,10 +24,11 @@ You can [view the demo here](https://hazardu5.github.io/aframe-test/dist/).
 *   To run the built in web-server run the following from the root of the repository:
 
     ```
-    npm run serve
+    npm start
     ```
 
-    Then browse to [http://localhost:9090](http://localhost:9090) to view.
+    Then browse to [http://localhost:9090](http://localhost:9090) to view. Source maps are enabled during development
+    to make it easier to debug issues reported in the console.
 
 *   To do a build for distribution online run the following from the root of the repository:
 

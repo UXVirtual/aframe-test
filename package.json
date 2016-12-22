@@ -47,9 +47,10 @@
     "webpack-dev-server": "^1.14.0"
   },
   "scripts": {
-    "build": "webpack",
-    "serve": "webpack-dev-server --content-base src --progress --watch --history-api-fallback --inline --hot --host 0.0.0.0 --port 9090",
-    "dist": "webpack && cp -L build/* dist/build && cp -L index.html dist",
+    "build-prod": "NODE_ENV='production' webpack",
+    "build-dev": "NODE_ENV='development' webpack",
+    "serve": "NODE_ENV='development' webpack-dev-server -d --content-base src --progress --watch --history-api-fallback --inline --hot --host 0.0.0.0 --port 9090",
+    "dist": "npm run build-prod && cp -L build/* dist/build && cp -L index.html dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run serve"
   }
