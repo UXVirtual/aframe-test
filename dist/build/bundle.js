@@ -122,9 +122,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _aframeReact.Scene,
-	        null,
-	        _react2.default.createElement(_aframeReact.Entity, { 'teleport-controls': true, 'hand-controls': 'left' }),
-	        _react2.default.createElement(_aframeReact.Entity, { 'hand-controls': 'right' }),
+	        { 'vr-mode-ui': 'enabled: true' },
+	        _react2.default.createElement(_aframeReact.Entity, { 'teleport-controls': true, 'hand-controls': 'left', position: '0 -999999999 0' }),
+	        _react2.default.createElement(_aframeReact.Entity, { 'hand-controls': 'right', position: '0 -999999999 0' }),
 	        _react2.default.createElement(
 	          _Camera2.default,
 	          null,
