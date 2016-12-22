@@ -22,6 +22,7 @@
     "aframe": "^0.4.0",
     "aframe-animation-component": "^3.0.4",
     "aframe-bmfont-text-component": "^0.1.4",
+    "aframe-gearvr-controls-component": "^0.1.1",
     "aframe-react": "^3.4.0",
     "aframe-text-component": "^0.3.0",
     "babel-polyfill": "^6.3.14",
