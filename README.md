@@ -10,6 +10,7 @@ You can [view the demo here](https://hazardu5.github.io/aframe-test/dist/).
 ## TODO:
 
 *   Add support for [dat.guiVR](https://github.com/dataarts/dat.guiVR)
+*   Wait for updated `a-frame` `0.4` support for `aframe-text-component`
 
 ## Installation
 
