@@ -29,7 +29,9 @@ class VRScene extends React.Component {
     return (
       <Scene>
 
-          <Entity teleport-controls vive-controls="hand: left" />
+          <Entity teleport-controls hand-controls="left" />
+
+          <Entity hand-controls="right" />
 
         <Camera>
           <a-cursor
