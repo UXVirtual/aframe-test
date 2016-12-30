@@ -21,8 +21,12 @@ class VRScene extends React.Component {
     constructor(props){
         super(props);
         var extras = require('aframe-extras');
+        //AFRAME.registerComponent('universal-controls', extras.controls['universal-controls']);
+        //AFRAME.registerComponent('checkpoint-controls', extras.controls['checkpoint-controls']);
         extras.controls.registerAll();
-        extras.primitives.registerAll();
+        //extras.primitives.registerAll();
+        AFRAME.registerComponent('checkpoint', extras.misc['checkpoint']);
+        //extras.misc.registerAll();
     }
 
 
