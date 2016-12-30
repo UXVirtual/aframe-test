@@ -90,7 +90,8 @@ class VRScene extends React.Component {
                   <Entity cursor="maxDistance: 30"
                             position="0 0 -1"
                             geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
-                            material="color: #CCC; shader: flat;" />
+                            material="color: #CCC; shader: flat;"
+                          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"/>
                   </Entity>
 
           <Entity id="terrain" position="0 -75 0" rotation="0 -90 0" terrain-model='color: #736357; roughness: 1; shading: flat; DEM: url(assets/obj/terrain/noctis-3500-clip-envi.bin); planeWidth: 346; planeHeight: 346; segmentsWidth: 199; segmentsHeight: 199; zPosition: 100;'></Entity>
@@ -99,9 +100,9 @@ class VRScene extends React.Component {
           <a-sky src="#sky" rotation="0 -90 0"/>
                   <Grid src="#grid" transparent="true"></Grid>
 
-                  <a-cylinder checkpoint radius="1" height="0.1" position="0 0 -5.2" color="#39BB82"></a-cylinder>
-                  <a-cylinder checkpoint radius="1" height="0.1" position="3 0 0" color="#39BB82"></a-cylinder>
-                  <a-cylinder checkpoint radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
+                  <a-cylinder checkpoint radius="1" height="0.1" position="0 0 -5.2" color="#ffb820"></a-cylinder>
+                  <a-cylinder checkpoint radius="1" height="0.1" position="3 0 0" color="#ffb820"></a-cylinder>
+                  <a-cylinder checkpoint radius="1" height="0.1" position="-3 0 0" color="#ffb820"></a-cylinder>
 
           <Entity light="color: #736357;" position="-1 1 0"></Entity>
           <Entity id="point-light" light="color: #ffb820; type: point;" position="0 5 0"></Entity>
