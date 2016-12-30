@@ -13,9 +13,7 @@ import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Camera from './components/Camera';
-import AnimatedCube from './components/AnimatedCube';
-import Text from './components/Text';
+import Grid from './components/Grid';
 import Sky from './components/Sky';
 
 class VRScene extends React.Component {
@@ -34,6 +32,8 @@ class VRScene extends React.Component {
       <Scene physics-world="gravity: 0 -9.8 0" vr-mode-ui="enabled: true">
 
           <a-assets>
+              <a-mixin id="checkpoint"></a-mixin>
+              <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
               <a-asset-item id="uxvirtual-outer-obj" src="assets/obj/uxvirtual-logo/uxvirtual-outer.obj"></a-asset-item>
               <a-asset-item id="uxvirtual-outer-mtl" src="assets/obj/uxvirtual-logo/uxvirtual-outer.mtl"></a-asset-item>
               <a-asset-item id="uxvirtual-inner-b-obj" src="assets/obj/uxvirtual-logo/uxvirtual-inner-b.obj"></a-asset-item>
@@ -85,17 +85,23 @@ class VRScene extends React.Component {
               </Entity>
           </Entity>
 
-              <Camera id="camera" universal-controls />
+              <Entity camera id="camera" universal-controls="movementControls: checkpoint"
+                      checkpoint-controls="mode: teleport" position="0 1.764 0">
+                  <Entity cursor="maxDistance: 30"
+                            position="0 0 -1"
+                            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+                            material="color: #CCC; shader: flat;" />
+                  </Entity>
 
           <Entity id="terrain" position="0 -75 0" rotation="0 -90 0" terrain-model='color: #736357; roughness: 1; shading: flat; DEM: url(assets/obj/terrain/noctis-3500-clip-envi.bin); planeWidth: 346; planeHeight: 346; segmentsWidth: 199; segmentsHeight: 199; zPosition: 100;'></Entity>
 
 
           <a-sky src="#sky" rotation="0 -90 0"/>
-          <Entity position="0 -1 0"
-                    geometry="primitive: box; width: 10000; height: 0.1; depth: 10000;" rotation="-90 0 0"
-                    material="src: #grid; repeat: 10000 10000; transparent: true;"
-                  physics-body="mass: 0; boundingBox: 10000 0.1 10000"
-              />
+                  <Grid src="#grid" transparent="true"></Grid>
+
+                  <a-cylinder checkpoint radius="1" height="0.1" position="0 0 -5.2" color="#39BB82"></a-cylinder>
+                  <a-cylinder checkpoint radius="1" height="0.1" position="3 0 0" color="#39BB82"></a-cylinder>
+                  <a-cylinder checkpoint radius="1" height="0.1" position="-3 0 0" color="#39BB82"></a-cylinder>
 
           <Entity light="color: #736357;" position="-1 1 0"></Entity>
           <Entity id="point-light" light="color: #ffb820; type: point;" position="0 5 0"></Entity>
