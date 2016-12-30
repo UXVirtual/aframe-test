@@ -1,3 +1,3 @@
 [submodule "aframe-react-boilerplate"]
 	path = aframe-react-boilerplate
-	url = https://hazardu5@github.com/ngokevin/aframe-react-boilerplate.git
+	url = git@github.com:HAZARDU5/aframe-react-boilerplate.git
