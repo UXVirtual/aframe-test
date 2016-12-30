@@ -1,1 +1,0 @@
-../../../aframe-react-boilerplate/src/js/components/Camera.js
