@@ -5,13 +5,13 @@ AFRAME.registerPrimitive('a-grid2',  {
     defaultComponents: {
         geometry: {
             primitive: 'plane',
-            width: 75,
-            height: 75
+            width: 10000,
+            height: 10000
         },
         rotation: {x: -90, y: 0, z: 0},
         material: {
             src: 'url(https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.16.3/assets/grid.png)',
-            repeat: '75 75',
+            repeat: '10000 10000',
             transparent: false
         }
     },
