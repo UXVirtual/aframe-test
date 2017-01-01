@@ -35,8 +35,8 @@ class VRScene extends React.Component {
 
         return (
           <Scene physics-world="gravity: 0 -9.8 0" vr-mode-ui="enabled: true" fog="type: linear; color: #AAA; near: 1; far: 1000">
-              <a-animation id="scene-fade-out-animation" attribute="fog.near" begin="fadeOut" to="1" duration="1000" easing="ease-out"></a-animation>
-              <a-animation attribute="fog.far" begin="fadeOut" to="2" duration="1000" easing="ease-out"></a-animation>
+              <a-animation id="scene-fade-out-animation" attribute="fog.near" begin="fadeOut" to="1" duration="1000" easing="ease-in"></a-animation>
+              <a-animation attribute="fog.far" begin="fadeOut" to="2" duration="1000" easing="ease-in"></a-animation>
               <a-animation attribute="fog.near" begin="fadeIn" to="1" duration="1000" easing="ease-in"></a-animation>
               <a-animation attribute="fog.far" begin="fadeIn" to="1000" duration="1000" easing="ease-in"></a-animation>
               <a-assets>
