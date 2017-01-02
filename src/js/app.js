@@ -2,7 +2,6 @@ import 'aframe';
 import 'aframe-extras';
 import 'aframe-terrain-model-component';
 import 'aframe-animation-component';
-import 'aframe-teleport-controls';
 import 'aframe-bmfont-text-component';
 import 'aframe-physics-components';
 import 'babel-polyfill';
@@ -17,6 +16,7 @@ import Grid from './components/Grid';
 import Sky from './components/Sky';
 
 import Checkpoint from './misc/checkpoint.js';
+import CheckpointControls from './controls/checkpoint-controls.js';
 
 class VRScene extends React.Component {
 
@@ -108,9 +108,9 @@ class VRScene extends React.Component {
               <a-sky src="#sky" rotation="0 -90 0"/>
                       <Grid src="#grid" transparent="true"></Grid>
 
-                        <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 0 -5.2">
-                            <a-cylinder radius="1" height="0.1" color="#ffb820" rotation="90 0 0" />
-                        </Entity>
+                <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 0 -5.2" >
+                    <a-cylinder radius="1" height="0.1" color="#ffb820" rotation="90 0 0" />
+                </Entity>
 
               <Entity look-at="src: #camera" checkpoint id="checkpoint2" position="-85.08 31.58 50.08">
                   <a-cylinder radius="1" height="0.1" color="#ffb820" rotation="90 0 0" />
