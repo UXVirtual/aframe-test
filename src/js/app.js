@@ -89,7 +89,7 @@ class VRScene extends React.Component {
     render () {
 
         return (
-          <Scene auto-init-vr physics-world="gravity: 0 -9.8 0" vr-mode-ui="enabled: true" fog="color: #000; near: 1; far: 10000">
+          <Scene physics-world="gravity: 0 -9.8 0" debug auto-init-vr vr-mode-ui="enabled: true" fog="color: #000; near: 1; far: 10000">
               <a-animation id="scene-fade-out-animation" attribute="fog.near" begin="fadeOut" to="1" duration="1000" easing="ease-in"></a-animation>
               <a-animation attribute="fog.far" begin="fadeOut" to="2" duration="1000" easing="ease-in"></a-animation>
               <a-animation attribute="fog.near" begin="fadeIn" to="1" duration="500" easing="ease-in"></a-animation>
@@ -110,6 +110,16 @@ class VRScene extends React.Component {
                       <audio id="spaceambient-sound" src="assets/mp3/spaceambient.ogg" preload="auto" />
                           <audio id="system-ready-sound" src="assets/mp3/system-ready.ogg" preload="auto" />
               </a-assets>
+
+              <Entity id="player" position="0 1.764 0">
+                  <a-camera id="camera" auto-hand-teleport-controls>
+                      <Entity cursor="maxDistance: 30"
+                              position="0 0 -1"
+                              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+                              material="color: #CCC; shader: flat;"
+                              animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"/>
+                  </a-camera>
+              </Entity>
 
               <Entity id="start-sound" position="0 0 -20" sound="src: #newbuntu-sound; autoplay: true; loop: false; volume: 10;"/>
 
@@ -146,15 +156,7 @@ class VRScene extends React.Component {
                   </Entity>
               </Entity>
 
-              <Entity id="player" position="0 1.764 0" auto-hand-teleport-controls>
-                  <Entity camera id="camera">
-                      <Entity cursor="maxDistance: 30"
-                              position="0 0 -1"
-                              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
-                              material="color: #CCC; shader: flat;"
-                              animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"/>
-                  </Entity>
-              </Entity>
+
 
               <Entity id="terrain" position="0 -75 0" rotation="0 -90 0" terrain-model='color: #736357; roughness: 1; shading: flat; DEM: url(assets/obj/terrain/noctis-3500-clip-envi.bin); planeWidth: 346; planeHeight: 346; segmentsWidth: 199; segmentsHeight: 199; zPosition: 100;'></Entity>
 
