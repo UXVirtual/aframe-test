@@ -50,6 +50,10 @@ module.exports = {
     animation.removeEventListener('animationend',this.setCheckpoint.bind(this));
 
     scene.emit('fadeIn');
+
+
+
+
   },
 
   fire: function () {

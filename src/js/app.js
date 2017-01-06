@@ -4,7 +4,9 @@ import 'aframe-terrain-model-component';
 import 'aframe-animation-component';
 import 'aframe-bmfont-text-component';
 import 'aframe-physics-components';
+import 'aframe-teleport-controls';
 import 'babel-polyfill';
+import 'aframe-sun-sky/dist/aframe-sun-sky';
 import 'kframe';
 import 'aframe-look-at-billboard-component';
 
@@ -18,27 +20,80 @@ import Sky from './components/Sky';
 import Checkpoint from './misc/checkpoint.js';
 import CheckpointControls from './controls/checkpoint-controls.js';
 
+//import a-frame only components (not React wrapped Components)
+import './misc/sun-position-setter';
+import './controls/auto-hand-controls';
+import './controls/auto-hand-teleport-controls';
+import './misc/auto-init-vr';
+
 class VRScene extends React.Component {
 
     constructor(props){
         super(props);
+
         var extras = require('aframe-extras');
         //AFRAME.registerComponent('universal-controls', extras.controls['universal-controls']);
         //AFRAME.registerComponent('checkpoint-controls', extras.controls['checkpoint-controls']);
         extras.controls.registerAll();
         //extras.primitives.registerAll();
         AFRAME.registerComponent('checkpoint', Checkpoint);
+        AFRAME.registerComponent('a-ocean', extras.primitives['a-ocean']);
         //extras.misc.registerAll();
+    }
+
+    componentDidMount() {
+        console.log('scene initialized');
+
+        var scene = document.querySelector('a-scene');
+        var player = scene.querySelector('#player');
+
+        console.log('Player: ',player);
+
+        var isPresent = true;
+        if (AFRAME.utils.trackedControls.isControllerPresent(scene, undefined, {})) {
+            console.log('Two hands');
+        } else
+        if (AFRAME.utils.gearvrControls && AFRAME.utils.gearvrControls.isControllerPresent()) {
+            console.log('One hand');
+        } else {
+            isPresent = false;
+        }
+
+        if(isPresent) {
+            //enter VR automatically
+            scene.enterVR();
+        }else{
+            console.log('Hand controls not available, using headset checkpoint controls instead');
+
+            var camera = player.querySelector('#camera');
+
+            console.log('Camera',camera);
+
+            camera.setAttribute('universal-controls','movementControls: checkpoint');
+            camera.setAttribute('checkpoint-controls','mode: teleport');
+        }
+
+
+        player.addEventListener('lookmanewhands',function(){
+            console.log('Found new hand');
+            //TODO: hide checkpoints automatically
+        });
+
+        player.addEventListener('lookmanohands',function(){
+
+            console.log('Hand removed');
+
+        });
     }
 
     render () {
 
         return (
-          <Scene physics-world="gravity: 0 -9.8 0" vr-mode-ui="enabled: true" fog="type: linear; color: #AAA; near: 1; far: 1000">
+          <Scene auto-init-vr physics-world="gravity: 0 -9.8 0" vr-mode-ui="enabled: true" fog="color: #000; near: 1; far: 10000">
               <a-animation id="scene-fade-out-animation" attribute="fog.near" begin="fadeOut" to="1" duration="1000" easing="ease-in"></a-animation>
               <a-animation attribute="fog.far" begin="fadeOut" to="2" duration="1000" easing="ease-in"></a-animation>
-              <a-animation attribute="fog.near" begin="fadeIn" to="1" duration="1000" easing="ease-in"></a-animation>
-              <a-animation attribute="fog.far" begin="fadeIn" to="1000" duration="1000" easing="ease-in"></a-animation>
+              <a-animation attribute="fog.near" begin="fadeIn" to="1" duration="500" easing="ease-in"></a-animation>
+              <a-animation attribute="fog.far" begin="fadeIn" to="10000" duration="500" easing="ease-in"></a-animation>
               <a-assets>
                   <a-mixin id="checkpoint"></a-mixin>
                   <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
@@ -54,8 +109,6 @@ class VRScene extends React.Component {
                   <audio id="newbuntu-sound" src="assets/mp3/newbuntu.ogg" preload="auto" />
                       <audio id="spaceambient-sound" src="assets/mp3/spaceambient.ogg" preload="auto" />
                           <audio id="system-ready-sound" src="assets/mp3/system-ready.ogg" preload="auto" />
-                  <img id="grid" src="assets/img/grid.png" crossOrigin="anonymous"/>
-                  <img id="sky" src="assets/img/skybox2.jpg" crossOrigin="anonymous" />
               </a-assets>
 
               <Entity id="start-sound" position="0 0 -20" sound="src: #newbuntu-sound; autoplay: true; loop: false; volume: 10;"/>
@@ -93,31 +146,49 @@ class VRScene extends React.Component {
                   </Entity>
               </Entity>
 
-                  <Entity camera id="camera" universal-controls="movementControls: checkpoint"
-                          checkpoint-controls="mode: teleport" position="0 1.764 0">
+              <Entity id="player" position="0 1.764 0" auto-hand-teleport-controls>
+                  <Entity camera id="camera">
                       <Entity cursor="maxDistance: 30"
-                                position="0 0 -1"
-                                geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
-                                material="color: #CCC; shader: flat;"
+                              position="0 0 -1"
+                              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
+                              material="color: #CCC; shader: flat;"
                               animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"/>
-                      </Entity>
+                  </Entity>
+              </Entity>
 
               <Entity id="terrain" position="0 -75 0" rotation="0 -90 0" terrain-model='color: #736357; roughness: 1; shading: flat; DEM: url(assets/obj/terrain/noctis-3500-clip-envi.bin); planeWidth: 346; planeHeight: 346; segmentsWidth: 199; segmentsHeight: 199; zPosition: 100;'></Entity>
 
 
-              <a-sky src="#sky" rotation="0 -90 0"/>
-                      <Grid src="#grid" transparent="true"></Grid>
+              <a-sun-sky sun-position-setter>
+                  <a-entity id="orbit">
+                      <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="900000"
+                                   repeat="indefinite" easing="linear"></a-animation>
+                  </a-entity>
+              </a-sun-sky>
+              <a-ocean color="#92E2E2" position="0 -75 0" width="25" depth="25" density="15" speed="2"></a-ocean>
+              <Grid id="ground" transparent="true" />
 
-                <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 0 -5.2" >
-                    <a-cylinder radius="1" height="0.1" color="#ffb820" rotation="90 0 0" />
+                <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 1.7 0" >
+                    <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
                 </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint2" position="-85.08 31.58 50.08">
-                  <a-cylinder radius="1" height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint2" position="-94.81 28.43 51.12">
+                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint3" position="58.8 74.69 -86.33">
-                  <a-cylinder radius="1" height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint3" position="55.92 72.31 -66.90">
+                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              </Entity>
+
+              <Entity look-at="src: #camera" checkpoint id="checkpoint4" position="-55.41 151.22 -52.76">
+                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              </Entity>
+
+              <Entity look-at="src: #camera" checkpoint id="checkpoint5" position="58.8 74.69 -86.33">
+                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              </Entity>
+              <Entity look-at="src: #camera" checkpoint id="checkpoint6" position="58.8 74.69 -86.33">
+                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
               <Entity light="color: #736357;" position="-1 1 0"></Entity>
