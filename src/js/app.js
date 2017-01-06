@@ -73,6 +73,13 @@ class VRScene extends React.Component {
             camera.setAttribute('checkpoint-controls','mode: teleport');
         }*/
 
+        var scene = document.querySelector('a-scene');
+
+        var camera = scene.querySelector('#camera');
+        var raycaster = camera.querySelector('[cursor]');
+
+        console.log('Raycaster: ',raycaster);
+
 
         player.addEventListener('lookmanewhands',function(){
             console.log('Found new hand');
@@ -114,11 +121,12 @@ class VRScene extends React.Component {
 
               <Entity id="player" position="0 0 0" auto-hand-teleport-controls>
                   <a-camera id="camera" universal-controls="movementControls: checkpoint" checkpoint-controls="mode: teleport">
-                      <Entity cursor="maxDistance: 30"
+                      <Entity raycaster="far: 100; interval: 1000; objects: .clickable; recursive: false" cursor
                               position="0 0 -1"
                               geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
                               material="color: #CCC; shader: flat;"
-                              animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"/>
+                              animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+                          />
                   </a-camera>
               </Entity>
 
@@ -132,7 +140,7 @@ class VRScene extends React.Component {
               <Entity id="desert-tower" position="-54.7 20.72 -74.01" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
 
               <Entity id="logo" position="0 0 -20" sound="src: #spaceambient-sound; autoplay: true; loop: true; volume: 30">
-                  <Entity obj-model="obj: #uxvirtual-outer-obj; mtl: #uxvirtual-outer-mtl" sound="src: #system-ready-sound; autoplay: false; loop: false; volume: 30; on: click">
+                  <Entity obj-model="obj: #uxvirtual-outer-obj; mtl: #uxvirtual-outer-mtl" sound="src: #system-ready-sound; autoplay: false; loop: false; volume: 30; on: click" class="clickable">
                       <a-animation attribute="rotation"
                                    dur="10000"
                                    fill="forwards"
@@ -166,26 +174,26 @@ class VRScene extends React.Component {
               <a-ocean color="#92E2E2" position="0 -75 0" width="25" depth="25" density="15" speed="2"></a-ocean>
               <Grid id="ground" position="0 -1.764 0" transparent="true" />
 
-                <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 1.7 0" >
+                <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint1" position="0 1.7 0" >
                     <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
                 </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint2" position="-94.81 28.43 51.12">
+              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint2" position="-94.81 28.43 51.12">
                   <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint3" position="55.92 72.31 -66.90">
+              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint3" position="55.92 72.31 -66.90">
                   <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint4" position="-55.41 151.22 -52.76">
+              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint4" position="-55.41 151.22 -52.76">
                   <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint5" position="58.8 74.69 -86.33">
+              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint5" position="58.8 74.69 -86.33">
                   <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
-              <Entity look-at="src: #camera" checkpoint id="checkpoint6" position="58.8 74.69 -86.33">
+              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint6" position="58.8 74.69 -86.33">
                   <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
