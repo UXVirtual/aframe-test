@@ -6,7 +6,7 @@ import 'aframe-bmfont-text-component';
 import 'aframe-physics-components';
 import 'aframe-teleport-controls';
 import 'babel-polyfill';
-import 'aframe-sun-sky/dist/aframe-sun-sky';
+//import 'aframe-sun-sky/dist/aframe-sun-sky';
 import 'kframe';
 import 'aframe-look-at-billboard-component';
 
@@ -21,7 +21,7 @@ import Checkpoint from './misc/checkpoint.js';
 import CheckpointControls from './controls/checkpoint-controls.js';
 
 //import a-frame only components (not React wrapped Components)
-import './misc/sun-position-setter';
+//import './misc/sun-position-setter';
 import './controls/auto-hand-controls';
 import './controls/auto-hand-teleport-controls';
 import './misc/auto-init-vr';
@@ -62,7 +62,7 @@ class VRScene extends React.Component {
         if(isPresent) {
             //enter VR automatically
             scene.enterVR();
-        }else{
+        }/*else{
             console.log('Hand controls not available, using headset checkpoint controls instead');
 
             var camera = player.querySelector('#camera');
@@ -71,7 +71,7 @@ class VRScene extends React.Component {
 
             camera.setAttribute('universal-controls','movementControls: checkpoint');
             camera.setAttribute('checkpoint-controls','mode: teleport');
-        }
+        }*/
 
 
         player.addEventListener('lookmanewhands',function(){
@@ -105,14 +105,15 @@ class VRScene extends React.Component {
                   <a-asset-item id="uxvirtual-inner-t-mtl" src="assets/obj/uxvirtual-logo/uxvirtual-inner-t.mtl"></a-asset-item>
                   <a-asset-item id="desert-tower-obj" src="assets/obj/desert-tower/desert-tower.obj"></a-asset-item>
                   <a-asset-item id="desert-tower-mtl" src="assets/obj/desert-tower/desert-tower.mtl"></a-asset-item>
+                  <img id="sky" src="assets/img/skybox2.jpg" crossOrigin="anonymous" />
 
                   <audio id="newbuntu-sound" src="assets/mp3/newbuntu.ogg" preload="auto" />
                       <audio id="spaceambient-sound" src="assets/mp3/spaceambient.ogg" preload="auto" />
                           <audio id="system-ready-sound" src="assets/mp3/system-ready.ogg" preload="auto" />
               </a-assets>
 
-              <Entity id="player" position="0 1.764 0">
-                  <a-camera id="camera" auto-hand-teleport-controls>
+              <Entity id="player" position="0 0 0" auto-hand-teleport-controls>
+                  <a-camera id="camera" universal-controls="movementControls: checkpoint" checkpoint-controls="mode: teleport">
                       <Entity cursor="maxDistance: 30"
                               position="0 0 -1"
                               geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
@@ -161,14 +162,9 @@ class VRScene extends React.Component {
               <Entity id="terrain" position="0 -75 0" rotation="0 -90 0" terrain-model='color: #736357; roughness: 1; shading: flat; DEM: url(assets/obj/terrain/noctis-3500-clip-envi.bin); planeWidth: 346; planeHeight: 346; segmentsWidth: 199; segmentsHeight: 199; zPosition: 100;'></Entity>
 
 
-              <a-sun-sky sun-position-setter>
-                  <a-entity id="orbit">
-                      <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="900000"
-                                   repeat="indefinite" easing="linear"></a-animation>
-                  </a-entity>
-              </a-sun-sky>
+              <a-sky src="#sky" rotation="0 -90 0"/>
               <a-ocean color="#92E2E2" position="0 -75 0" width="25" depth="25" density="15" speed="2"></a-ocean>
-              <Grid id="ground" transparent="true" />
+              <Grid id="ground" position="0 -1.764 0" transparent="true" />
 
                 <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 1.7 0" >
                     <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />

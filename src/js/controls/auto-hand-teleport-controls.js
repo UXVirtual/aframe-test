@@ -11,6 +11,9 @@ AFRAME.registerComponent('auto-hand-teleport-controls', {
             Object.keys(hands).forEach(function (key) {
                 if (hands.hasOwnProperty(key)) {
                     hands[key].setAttribute('teleport-controls', 'collisionEntity', '#terrain');
+                    hands[key].addEventListener('gripclose',function(){
+                        console.log('Grip closed');
+                    });
                 }
             });
         }
