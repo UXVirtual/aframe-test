@@ -10,9 +10,9 @@ AFRAME.registerPrimitive('a-grid2',  {
         },
         rotation: {x: -90, y: 0, z: 0},
         material: {
-            src: 'url(https://cdn.rawgit.com/donmccurdy/aframe-extras/v1.16.3/assets/grid.png)',
+            src: 'url(assets/img/grid.png)',
             repeat: '10000 10000',
-            transparent: false
+            transparent: true
         }
     },
     mappings: {
