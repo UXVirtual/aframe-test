@@ -38,6 +38,9 @@ class VRScene extends React.Component {
         //extras.primitives.registerAll();
         AFRAME.registerComponent('checkpoint', Checkpoint);
         AFRAME.registerComponent('a-ocean', extras.primitives['a-ocean']);
+
+        AFRAME.registerComponent('lava-material', require('./components/shaders/LavaMaterial'));
+
         //extras.misc.registerAll();
     }
 
@@ -72,35 +75,66 @@ class VRScene extends React.Component {
             camera.setAttribute('universal-controls','movementControls: checkpoint');
             camera.setAttribute('checkpoint-controls','mode: teleport');
         }*/
-
-        var scene = document.querySelector('a-scene');
-
-        var camera = scene.querySelector('#camera');
-        var raycaster = camera.querySelector('[cursor]');
-
-        console.log('Raycaster: ',raycaster);
-
-
-        player.addEventListener('lookmanewhands',function(){
-            console.log('Found new hand');
-            //TODO: hide checkpoints automatically
-        });
-
-        player.addEventListener('lookmanohands',function(){
-
-            console.log('Hand removed');
-
-        });
     }
 
     render () {
 
+        /*
+
+         <Entity position="0 -0.46 -14.31">
+         <a-animation attribute="rotation"
+         dur="10000"
+         fill="forwards"
+         to="0 360 0"
+         easing="linear"
+         repeat="indefinite"></a-animation>
+         <Entity id="michael-andrew" position="0 0 0" obj-model="obj: #michael-andrew-obj; mtl: #michael-andrew-mtl" rotation="-90 0 0" scale="10 10 10" />
+         </Entity>
+
+         <Entity position="7 -0.46 -14.31">
+         <a-animation attribute="rotation"
+         dur="10000"
+         fill="forwards"
+         to="0 360 0"
+         easing="linear"
+         repeat="indefinite"></a-animation>
+         <Entity id="kevin" position="0 0 0" obj-model="obj: #kevin-obj; mtl: #kevin-mtl" rotation="-90 0 0" scale="10 10 10" />
+         </Entity>
+
+         <Entity position="-7 -0.46 -14.31">
+         <a-animation attribute="rotation"
+         dur="10000"
+         fill="forwards"
+         to="0 360 0"
+         easing="linear"
+         repeat="indefinite"></a-animation>
+         <Entity id="asher" position="0 0 0" obj-model="obj: #asher-obj; mtl: #asher-mtl" rotation="-90 0 0" scale="10 10 10" />
+         </Entity>
+
+         <Entity position="-14 -0.46 -14.31">
+         <a-animation attribute="rotation"
+         dur="10000"
+         fill="forwards"
+         to="0 360 0"
+         easing="linear"
+         repeat="indefinite"></a-animation>
+         <Entity id="manuel" position="0 0 0" obj-model="obj: #manuel-obj; mtl: #manuel-mtl" rotation="-90 0 0" scale="10 10 10" />
+         </Entity>
+
+         <Entity position="-21 -0.46 -14.31">
+         <a-animation attribute="rotation"
+         dur="10000"
+         fill="forwards"
+         to="0 360 0"
+         easing="linear"
+         repeat="indefinite"></a-animation>
+         <Entity id="shelley" position="-0.31 0 2" obj-model="obj: #shelley-obj; mtl: #shelley-mtl" rotation="-90 0 180" scale="10 10 10" />
+         </Entity>
+
+         */
+
         return (
-          <Scene physics-world="gravity: 0 -9.8 0" debug auto-init-vr vr-mode-ui="enabled: true" fog="color: #000; near: 1; far: 10000">
-              <a-animation id="scene-fade-out-animation" attribute="fog.near" begin="fadeOut" to="1" duration="1000" easing="ease-in"></a-animation>
-              <a-animation attribute="fog.far" begin="fadeOut" to="2" duration="1000" easing="ease-in"></a-animation>
-              <a-animation attribute="fog.near" begin="fadeIn" to="1" duration="500" easing="ease-in"></a-animation>
-              <a-animation attribute="fog.far" begin="fadeIn" to="10000" duration="500" easing="ease-in"></a-animation>
+          <Scene physics-world="gravity: 0 -9.8 0" debug auto-init-vr vr-mode-ui="enabled: true">
               <a-assets>
                   <a-mixin id="checkpoint"></a-mixin>
                   <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
@@ -112,6 +146,18 @@ class VRScene extends React.Component {
                   <a-asset-item id="uxvirtual-inner-t-mtl" src="assets/obj/uxvirtual-logo/uxvirtual-inner-t.mtl"></a-asset-item>
                   <a-asset-item id="desert-tower-obj" src="assets/obj/desert-tower/desert-tower.obj"></a-asset-item>
                   <a-asset-item id="desert-tower-mtl" src="assets/obj/desert-tower/desert-tower.mtl"></a-asset-item>
+                  <a-asset-item id="michael-andrew-obj" src="assets/obj/michael-andrew/michael-andrew-lr.obj"></a-asset-item>
+                  <a-asset-item id="michael-andrew-mtl" src="assets/obj/michael-andrew/michael-andrew-lr.mtl"></a-asset-item>
+                  <a-asset-item id="kevin-obj" src="assets/obj/kevin/kevin.obj"></a-asset-item>
+                  <a-asset-item id="kevin-mtl" src="assets/obj/kevin/kevin.mtl"></a-asset-item>
+                  <a-asset-item id="asher-obj" src="assets/obj/asher/asher.obj"></a-asset-item>
+                  <a-asset-item id="asher-mtl" src="assets/obj/asher/asher.mtl"></a-asset-item>
+                  <a-asset-item id="manuel-obj" src="assets/obj/manuel/manuel-lr.obj"></a-asset-item>
+                  <a-asset-item id="manuel-mtl" src="assets/obj/manuel/manuel-lr.mtl"></a-asset-item>
+                  <a-asset-item id="shelley-obj" src="assets/obj/shelley/shelley-lr.obj"></a-asset-item>
+                  <a-asset-item id="shelley-mtl" src="assets/obj/shelley/shelley-lr.mtl"></a-asset-item>
+
+
                   <img id="sky" src="assets/img/skybox2.jpg" crossOrigin="anonymous" />
 
                   <audio id="newbuntu-sound" src="assets/mp3/newbuntu.ogg" preload="auto" />
@@ -121,12 +167,19 @@ class VRScene extends React.Component {
 
               <Entity id="player" position="0 0 0" auto-hand-teleport-controls>
                   <a-camera id="camera" universal-controls="movementControls: checkpoint" checkpoint-controls="mode: teleport">
-                      <Entity raycaster="far: 100; interval: 1000; objects: .clickable; recursive: false" cursor
-                              position="0 0 -1"
-                              geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03;"
-                              material="color: #CCC; shader: flat;"
-                              animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
-                          />
+                      <Entity raycaster="objects: .clickable" cursor="fuse: true; fuseTimeout: 1500"
+                              position="0 0 -5"
+                              geometry="primitive: ring; radiusOuter: 0.30; radiusInner: 0.20;"
+                              material="color: cyan; shader: flat;"
+
+                          >
+                          <a-animation begin="mouseleave" easing="ease-in" attribute="scale"
+                                       fill="forwards" to="1 1 1" dur="150"></a-animation>
+                          <a-animation begin="click" easing="ease-in" attribute="scale"
+                                       fill="backwards" from="0.5 0.5 0.5" to="1 1 1" dur="150"></a-animation>
+                          <a-animation begin="fusing" easing="ease-in" attribute="scale"
+                                       fill="forwards" from="1 1 1" to="0.8 0.8 0.8" dur="1500"></a-animation>
+                          </Entity>
                   </a-camera>
               </Entity>
 
@@ -135,7 +188,6 @@ class VRScene extends React.Component {
               <Entity id="desert-tower" position="-100.70 -25.47 37.63" rotation="2.82 45.00 4.50" scale="0.5 0.42 0.5" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
 
               <Entity id="desert-tower" position="29.65 -12.75 -74.01" rotation="0 18.00 -19.00" scale="0.7 0.68 0.7" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
-
 
               <Entity id="desert-tower" position="-54.7 20.72 -74.01" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
 
@@ -171,30 +223,32 @@ class VRScene extends React.Component {
 
 
               <a-sky src="#sky" rotation="0 -90 0"/>
-              <a-ocean color="#92E2E2" position="0 -75 0" width="25" depth="25" density="15" speed="2"></a-ocean>
               <Grid id="ground" position="0 -1.764 0" transparent="true" />
 
-                <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint1" position="0 1.7 0" >
-                    <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Grid lava-material="texture1: url(assets/img/shaders/lava/cloud.png); texture2: url(assets/img/shaders/lava/lavatile.jpg); uvscale:512;" position="0 -3 0" transparent="false" />
+
+
+              <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 1.7 0" >
+                    <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
                 </Entity>
 
-              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint2" position="-94.81 28.43 51.12">
-                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint2" position="-94.81 28.43 51.12">
+                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
-              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint3" position="55.92 72.31 -66.90">
-                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint3" position="55.92 72.31 -66.90">
+                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
-              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint4" position="-55.41 151.22 -52.76">
-                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint4" position="-55.41 151.22 -52.76">
+                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
-              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint5" position="58.8 74.69 -86.33">
-                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint5" position="58.8 74.69 -86.33">
+                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
-              <Entity look-at="src: #camera" class="clickable" checkpoint id="checkpoint6" position="58.8 74.69 -86.33">
-                  <a-cylinder height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint6" position="58.8 74.69 -86.33">
+                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
               </Entity>
 
               <Entity light="color: #736357;" position="-1 1 0"></Entity>
