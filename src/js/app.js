@@ -80,6 +80,17 @@ class VRScene extends React.Component {
     render () {
 
         /*
+         <a-asset-item id="michael-andrew-obj" src="assets/obj/michael-andrew/michael-andrew-lr.obj"></a-asset-item>
+         <a-asset-item id="michael-andrew-mtl" src="assets/obj/michael-andrew/michael-andrew-lr.mtl"></a-asset-item>
+         <a-asset-item id="kevin-obj" src="assets/obj/kevin/kevin.obj"></a-asset-item>
+         <a-asset-item id="kevin-mtl" src="assets/obj/kevin/kevin.mtl"></a-asset-item>
+         <a-asset-item id="asher-obj" src="assets/obj/asher/asher.obj"></a-asset-item>
+         <a-asset-item id="asher-mtl" src="assets/obj/asher/asher.mtl"></a-asset-item>
+         <a-asset-item id="manuel-obj" src="assets/obj/manuel/manuel-lr.obj"></a-asset-item>
+         <a-asset-item id="manuel-mtl" src="assets/obj/manuel/manuel-lr.mtl"></a-asset-item>
+         <a-asset-item id="shelley-obj" src="assets/obj/shelley/shelley-lr.obj"></a-asset-item>
+         <a-asset-item id="shelley-mtl" src="assets/obj/shelley/shelley-lr.mtl"></a-asset-item>
+
 
          <Entity position="0 -0.46 -14.31">
          <a-animation attribute="rotation"
@@ -146,17 +157,6 @@ class VRScene extends React.Component {
                   <a-asset-item id="uxvirtual-inner-t-mtl" src="assets/obj/uxvirtual-logo/uxvirtual-inner-t.mtl"></a-asset-item>
                   <a-asset-item id="desert-tower-obj" src="assets/obj/desert-tower/desert-tower.obj"></a-asset-item>
                   <a-asset-item id="desert-tower-mtl" src="assets/obj/desert-tower/desert-tower.mtl"></a-asset-item>
-                  <a-asset-item id="michael-andrew-obj" src="assets/obj/michael-andrew/michael-andrew-lr.obj"></a-asset-item>
-                  <a-asset-item id="michael-andrew-mtl" src="assets/obj/michael-andrew/michael-andrew-lr.mtl"></a-asset-item>
-                  <a-asset-item id="kevin-obj" src="assets/obj/kevin/kevin.obj"></a-asset-item>
-                  <a-asset-item id="kevin-mtl" src="assets/obj/kevin/kevin.mtl"></a-asset-item>
-                  <a-asset-item id="asher-obj" src="assets/obj/asher/asher.obj"></a-asset-item>
-                  <a-asset-item id="asher-mtl" src="assets/obj/asher/asher.mtl"></a-asset-item>
-                  <a-asset-item id="manuel-obj" src="assets/obj/manuel/manuel-lr.obj"></a-asset-item>
-                  <a-asset-item id="manuel-mtl" src="assets/obj/manuel/manuel-lr.mtl"></a-asset-item>
-                  <a-asset-item id="shelley-obj" src="assets/obj/shelley/shelley-lr.obj"></a-asset-item>
-                  <a-asset-item id="shelley-mtl" src="assets/obj/shelley/shelley-lr.mtl"></a-asset-item>
-
 
                   <img id="sky" src="assets/img/skybox2.jpg" crossOrigin="anonymous" />
 
