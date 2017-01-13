@@ -16,10 +16,6 @@ module.exports = {
     this.originalScale = this.el.components.scale.data;
   },
 
-  play: function () { this.el.addEventListener('click', this.fire); },
-  pause: function () { this.el.addEventListener('click', this.fire); },
-  remove: function () { this.pause(); },
-
   tick: function () {
 
     var camera = this.el.sceneEl.querySelector('[camera]');
@@ -33,36 +29,17 @@ module.exports = {
     var newScale = this.originalScale.x*(distance/this.data.size);
 
     this.el.object3D.scale.set(newScale,newScale,newScale);
-
-    //console.log(this.el.object3D);
   },
 
-  setCheckpoint: function(){
+  play: function () { this.el.addEventListener('click', this.fire); },
+  pause: function () { this.el.addEventListener('click', this.fire); },
+  remove: function () { this.pause(); },
 
+  fire: function () {
     var targetEl = this.el.sceneEl.querySelector('[checkpoint-controls]');
-
     if (!targetEl) {
       throw new Error('No `checkpoint-controls` component found.');
     }
     targetEl.components['checkpoint-controls'].setCheckpoint(this.el);
-    var scene = this.el.sceneEl;
-    var animation = scene.querySelector('#scene-fade-out-animation');
-    animation.removeEventListener('animationend',this.setCheckpoint.bind(this));
-
-    scene.emit('fadeIn');
-
-
-
-
-  },
-
-  fire: function () {
-
-    var scene = this.el.sceneEl;
-    var animation = scene.querySelector('#scene-fade-out-animation');
-
-    animation.addEventListener('animationend',this.setCheckpoint.bind(this));
-
-    scene.emit('fadeOut');
   }
 };
