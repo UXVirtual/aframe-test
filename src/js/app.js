@@ -39,6 +39,8 @@ class VRScene extends React.Component {
         AFRAME.registerComponent('checkpoint', Checkpoint);
         AFRAME.registerComponent('a-ocean', extras.primitives['a-ocean']);
 
+        AFRAME.registerComponent('stl-loader', require('./loaders/stl-loader'));
+
         AFRAME.registerComponent('lava-material', require('./components/shaders/LavaMaterial'));
 
         //extras.misc.registerAll();
@@ -80,6 +82,11 @@ class VRScene extends React.Component {
     render () {
 
         /*
+
+            TODO: add test for loading object and animation in PLY format using MagicaVoxel / Mixamo
+
+            https://github.com/donmccurdy/aframe-extras/tree/master/src/loaders
+
          <a-asset-item id="michael-andrew-obj" src="assets/obj/michael-andrew/michael-andrew-lr.obj"></a-asset-item>
          <a-asset-item id="michael-andrew-mtl" src="assets/obj/michael-andrew/michael-andrew-lr.mtl"></a-asset-item>
          <a-asset-item id="kevin-obj" src="assets/obj/kevin/kevin.obj"></a-asset-item>
@@ -90,7 +97,6 @@ class VRScene extends React.Component {
          <a-asset-item id="manuel-mtl" src="assets/obj/manuel/manuel-lr.mtl"></a-asset-item>
          <a-asset-item id="shelley-obj" src="assets/obj/shelley/shelley-lr.obj"></a-asset-item>
          <a-asset-item id="shelley-mtl" src="assets/obj/shelley/shelley-lr.mtl"></a-asset-item>
-
 
          <Entity position="0 -0.46 -14.31">
          <a-animation attribute="rotation"
@@ -158,6 +164,9 @@ class VRScene extends React.Component {
                   <a-asset-item id="desert-tower-obj" src="assets/obj/desert-tower/desert-tower.obj"></a-asset-item>
                   <a-asset-item id="desert-tower-mtl" src="assets/obj/desert-tower/desert-tower.mtl"></a-asset-item>
 
+                  <a-asset-item id="winch-obj" src="assets/obj/3d-scanner/winch/winch.obj"></a-asset-item>
+                  <a-asset-item id="winch-mtl" src="assets/obj/3d-scanner/winch/obj.mtl"></a-asset-item>
+
                   <img id="sky" src="assets/img/skybox2.jpg" crossOrigin="anonymous" />
 
                   <audio id="newbuntu-sound" src="assets/mp3/newbuntu.ogg" preload="auto" />
@@ -191,6 +200,10 @@ class VRScene extends React.Component {
 
               <Entity id="desert-tower" position="-54.7 20.72 -74.01" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
 
+              <Entity id="winch" position="0 0 0" obj-model="obj: #winch-obj; mtl: #winch-mtl" rotation="-90 0 0" scale="0.001 0.001 0.001" />
+
+              <Entity id="winch2" position="5 0 0" stl-loader="src: url(./assets/obj/3d-scanner/winch/winch.stl);" rotation="-90 0 0" scale="0.001 0.001 0.001" />
+
               <Entity id="logo" position="0 0 -20" sound="src: #spaceambient-sound; autoplay: true; loop: true; volume: 30">
                   <Entity obj-model="obj: #uxvirtual-outer-obj; mtl: #uxvirtual-outer-mtl" sound="src: #system-ready-sound; autoplay: false; loop: false; volume: 30; on: click" class="clickable">
                       <a-animation attribute="rotation"
@@ -223,7 +236,7 @@ class VRScene extends React.Component {
 
 
               <a-sky src="#sky" rotation="0 -90 0"/>
-              <Grid id="ground" position="0 -1.764 0" transparent="true" />
+              <Grid id="ground" position="0 -0.1 0" transparent="true" />
 
               <Grid lava-material="texture1: url(assets/img/shaders/lava/cloud.png); texture2: url(assets/img/shaders/lava/lavatile.jpg); uvscale:512;" position="0 -3 0" transparent="false" />
 
