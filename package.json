@@ -36,7 +36,8 @@
     "kframe": "^0.3.0",
     "lodash": "^4.17.2",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "three-stl-loader": "^1.0.4"
   },
   "devDependencies": {
     "babel": "^6.3.13",
