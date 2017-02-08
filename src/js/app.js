@@ -164,9 +164,6 @@ class VRScene extends React.Component {
                   <a-asset-item id="desert-tower-obj" src="assets/obj/desert-tower/desert-tower.obj"></a-asset-item>
                   <a-asset-item id="desert-tower-mtl" src="assets/obj/desert-tower/desert-tower.mtl"></a-asset-item>
 
-                  <a-asset-item id="winch-obj" src="assets/obj/3d-scanner/winch/winch.obj"></a-asset-item>
-                  <a-asset-item id="winch-mtl" src="assets/obj/3d-scanner/winch/obj.mtl"></a-asset-item>
-
                   <img id="sky" src="assets/img/skybox2.jpg" crossOrigin="anonymous" />
 
                   <audio id="newbuntu-sound" src="assets/mp3/newbuntu.ogg" preload="auto" />
@@ -199,10 +196,6 @@ class VRScene extends React.Component {
               <Entity id="desert-tower" position="29.65 -12.75 -74.01" rotation="0 18.00 -19.00" scale="0.7 0.68 0.7" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
 
               <Entity id="desert-tower" position="-54.7 20.72 -74.01" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
-
-              <Entity id="winch" position="0 0 0" obj-model="obj: #winch-obj; mtl: #winch-mtl" rotation="-90 0 0" scale="0.001 0.001 0.001" />
-
-              <Entity id="winch2" position="5 0 0" stl-loader="src: url(./assets/obj/3d-scanner/winch/winch.stl);" rotation="-90 0 0" scale="0.001 0.001 0.001" />
 
               <Entity id="logo" position="0 0 -20" sound="src: #spaceambient-sound; autoplay: true; loop: true; volume: 30">
                   <Entity obj-model="obj: #uxvirtual-outer-obj; mtl: #uxvirtual-outer-mtl" sound="src: #system-ready-sound; autoplay: false; loop: false; volume: 30; on: click" class="clickable">
