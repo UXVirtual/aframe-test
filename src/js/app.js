@@ -3,7 +3,6 @@ import 'aframe-extras';
 import 'aframe-terrain-model-component';
 import 'aframe-animation-component';
 import 'aframe-bmfont-text-component';
-import 'aframe-physics-components';
 import 'aframe-teleport-controls';
 import 'babel-polyfill';
 //import 'aframe-sun-sky/dist/aframe-sun-sky';
@@ -16,6 +15,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Grid from './components/Grid';
 import Sky from './components/Sky';
+import Target from './components/Target';
 
 import Checkpoint from './misc/checkpoint.js';
 import CheckpointControls from './controls/checkpoint-controls.js';
@@ -151,7 +151,7 @@ class VRScene extends React.Component {
          */
 
         return (
-          <Scene physics-world="gravity: 0 -9.8 0" debug auto-init-vr vr-mode-ui="enabled: true">
+          <Scene debug auto-init-vr vr-mode-ui="enabled: true">
               <a-assets>
                   <a-mixin id="checkpoint"></a-mixin>
                   <a-mixin id="checkpoint-hovered" color="#6CEEB5"></a-mixin>
@@ -163,12 +163,16 @@ class VRScene extends React.Component {
                   <a-asset-item id="uxvirtual-inner-t-mtl" src="assets/obj/uxvirtual-logo/uxvirtual-inner-t.mtl"></a-asset-item>
                   <a-asset-item id="desert-tower-obj" src="assets/obj/desert-tower/desert-tower.obj"></a-asset-item>
                   <a-asset-item id="desert-tower-mtl" src="assets/obj/desert-tower/desert-tower.mtl"></a-asset-item>
+                  <a-asset-item id="checkpoint-inner-obj" src="assets/obj/checkpoint/checkpoint-inner.obj"></a-asset-item>
+                  <a-asset-item id="checkpoint-inner-mtl" src="assets/obj/checkpoint/checkpoint-inner.mtl"></a-asset-item>
+                  <a-asset-item id="checkpoint-outer-obj" src="assets/obj/checkpoint/checkpoint-outer.obj"></a-asset-item>
+                  <a-asset-item id="checkpoint-outer-mtl" src="assets/obj/checkpoint/checkpoint-outer.mtl"></a-asset-item>
 
                   <img id="sky" src="assets/img/skybox2.jpg" crossOrigin="anonymous" />
 
                   <audio id="newbuntu-sound" src="assets/mp3/newbuntu.ogg" preload="auto" />
+                  <audio id="lava-sound" src="assets/mp3/lava.ogg" preload="auto" />
                       <audio id="spaceambient-sound" src="assets/mp3/spaceambient.ogg" preload="auto" />
-                          <audio id="system-ready-sound" src="assets/mp3/system-ready.ogg" preload="auto" />
               </a-assets>
 
               <Entity id="player" position="0 0 0" auto-hand-teleport-controls>
@@ -197,8 +201,8 @@ class VRScene extends React.Component {
 
               <Entity id="desert-tower" position="-54.7 20.72 -74.01" obj-model="obj: #desert-tower-obj; mtl: #desert-tower-mtl" />
 
-              <Entity id="logo" position="0 0 -20" sound="src: #spaceambient-sound; autoplay: true; loop: true; volume: 30">
-                  <Entity obj-model="obj: #uxvirtual-outer-obj; mtl: #uxvirtual-outer-mtl" sound="src: #system-ready-sound; autoplay: false; loop: false; volume: 30; on: click" class="clickable">
+              <Entity id="logo" position="0 0 -20" sound="src: #spaceambient-sound; autoplay: true; loop: true; volume: 10">
+                  <Entity obj-model="obj: #uxvirtual-outer-obj; mtl: #uxvirtual-outer-mtl">
                       <a-animation attribute="rotation"
                                    dur="10000"
                                    fill="forwards"
@@ -231,30 +235,32 @@ class VRScene extends React.Component {
               <a-sky src="#sky" rotation="0 -90 0"/>
               <Grid id="ground" position="0 -0.1 0" transparent="true" />
 
-              <Grid lava-material="texture1: url(assets/img/shaders/lava/cloud.png); texture2: url(assets/img/shaders/lava/lavatile.jpg); uvscale:512;" position="0 -3 0" transparent="false" />
+              <Grid sound="src: #lava-sound; autoplay: true; loop: true; volume: 3;" lava-material="texture1: url(assets/img/shaders/lava/cloud.png); texture2: url(assets/img/shaders/lava/lavatile.jpg); uvscale:512; fogdensity:0.1;" position="0 -5 0" transparent="false" />
 
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="0 1.7 0" >
-                    <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
-                </Entity>
-
-              <Entity look-at="src: #camera" checkpoint id="checkpoint2" position="-94.81 28.43 51.12">
-                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint1" position="-183.34 1.7 -55.83" >
+                  <Target obj-model1="obj: #checkpoint-outer-obj; mtl: #checkpoint-outer-mtl"  obj-model2="obj: #checkpoint-inner-obj; mtl: #checkpoint-inner-mtl" />
               </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint3" position="55.92 72.31 -66.90">
-                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
+
+              <Entity look-at="src: #camera" checkpoint id="checkpoint2" position="11.52 1.7 17.46" >
+                  <Target obj-model1="obj: #checkpoint-outer-obj; mtl: #checkpoint-outer-mtl"  obj-model2="obj: #checkpoint-inner-obj; mtl: #checkpoint-inner-mtl" />
               </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint4" position="-55.41 151.22 -52.76">
-                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint3" position="79.82 1.7 -48.03" >
+                  <Target obj-model1="obj: #checkpoint-outer-obj; mtl: #checkpoint-outer-mtl"  obj-model2="obj: #checkpoint-inner-obj; mtl: #checkpoint-inner-mtl" />
               </Entity>
 
-              <Entity look-at="src: #camera" checkpoint id="checkpoint5" position="58.8 74.69 -86.33">
-                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
+              <Entity look-at="src: #camera" checkpoint id="checkpoint4" position="-82.40 1.7 20.40" >
+                  <Target obj-model1="obj: #checkpoint-outer-obj; mtl: #checkpoint-outer-mtl"  obj-model2="obj: #checkpoint-inner-obj; mtl: #checkpoint-inner-mtl" />
               </Entity>
-              <Entity look-at="src: #camera" checkpoint id="checkpoint6" position="58.8 74.69 -86.33">
-                  <a-cylinder class="clickable" height="0.1" color="#ffb820" rotation="90 0 0" />
+
+              <Entity look-at="src: #camera" checkpoint id="checkpoint5" position="-129.62 1.7 -199.84" >
+                  <Target obj-model1="obj: #checkpoint-outer-obj; mtl: #checkpoint-outer-mtl"  obj-model2="obj: #checkpoint-inner-obj; mtl: #checkpoint-inner-mtl" />
+              </Entity>
+
+              <Entity look-at="src: #camera" checkpoint id="checkpoint6" position="43.23 1.7 -187.00" >
+                  <Target obj-model1="obj: #checkpoint-outer-obj; mtl: #checkpoint-outer-mtl"  obj-model2="obj: #checkpoint-inner-obj; mtl: #checkpoint-inner-mtl" />
               </Entity>
 
               <Entity light="color: #736357;" position="-1 1 0"></Entity>
